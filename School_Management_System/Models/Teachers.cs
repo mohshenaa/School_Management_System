@@ -1,5 +1,6 @@
-﻿using School_Management_System.Models;
+﻿using School_Management_System.SecurityModels;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace School_Management_System.Models
 {
@@ -8,15 +9,31 @@ namespace School_Management_System.Models
         [Key]
         public int TeacherId { get; set; }
 
-        [Required]
-        [StringLength(40, MinimumLength = 3)]
-        public string TeacherName { get;set;}=default!;
 
         [Required]
+        [ForeignKey("Users")]
         public int UserId { get; set; }
 
         [Required]
+        [ForeignKey("Departments")]
         public int DepartmentId { get; set; }
+
+
+        [Required]
+        [StringLength(40, MinimumLength = 3)]
+        [Display(Name = "Teacher Name")]
+        public string TeacherName { get;set;}=default!;
+
+
+
+        [DataType(DataType.ImageUrl)]
+        public string? ImageUrl { get; set; }
+
+
+        [NotMapped, Display(Name = "Image")]
+        public IFormFile? ImageFile { get; set; }
+
+
 
         [Required]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -29,12 +46,14 @@ namespace School_Management_System.Models
         [Required]
         public string Designation { get; set; }=default!;
 
-        [Required]
-        public Users User { get; set; }=new();
 
-        [Required]
-        public Departments Department { get; set; }=new();
-     
+        //navigation links
+        
+        public Users Users { get; set; } = default!;
+
+
+        public Departments Departments { get; set; } = default!;
+
 
 
     }

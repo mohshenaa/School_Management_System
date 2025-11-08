@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Linq;
 
 namespace School_Management_System.Models
@@ -10,17 +12,19 @@ namespace School_Management_System.Models
 
 
         [Required]
-        [StringLength(50, MinimumLength = 3)]
-        public string ExamName { get; set; } = default!;
-
-
-        [Required]
+        [ForeignKey("Classes")]
         public int ClassId { get; set; }
 
 
         [Required]
-    [EnumDataType(typeof(Term))]
-        public Term Term { get; set; } 
+        [StringLength(50, MinimumLength = 3)]
+        [DisplayName("Exam")]
+        public string ExamName { get; set; } = default!;
+
+
+        [Required]
+        [EnumDataType(typeof(Term))]
+        public Term Term { get; set; }
 
 
         [Required]
@@ -29,14 +33,16 @@ namespace School_Management_System.Models
 
 
         [Required]
-            [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
 
 
         [Required]
-        [StringLength(10, MinimumLength = 3)]
-        public string Type { get; set; } = default!;
+        [EnumDataType(typeof(Type))]
+        public Type Type { get; set; } 
 
+
+        //navigation link
 
         public Classes Class { get; set; } = new();
     }
@@ -44,6 +50,14 @@ namespace School_Management_System.Models
     {
         Midterm,
         Final
+    }
+
+    public enum Type
+    {
+        Written,
+        Mcq,
+        Practical,
+        Viva
     }
 }
 

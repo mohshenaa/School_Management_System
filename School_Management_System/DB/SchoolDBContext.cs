@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using School_Management_System.Models;
+using School_Management_System.SecurityModels;
 
 namespace School_Management_System.DB
 {

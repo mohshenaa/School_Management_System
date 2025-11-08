@@ -5,7 +5,7 @@ using System.Data;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace School_Management_System.Models
+namespace School_Management_System.SecurityModels
 {
     public class Users
     {

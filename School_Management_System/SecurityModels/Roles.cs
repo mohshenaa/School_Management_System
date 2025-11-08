@@ -1,7 +1,6 @@
-﻿using School_Management_System.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace School_Management_System.Models
+namespace School_Management_System.SecurityModels
 {
     public class Roles
     {

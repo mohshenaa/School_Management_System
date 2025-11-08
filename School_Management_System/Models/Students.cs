@@ -1,4 +1,6 @@
 ﻿using School_Management_System.Models;
+using School_Management_System.SecurityModels;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
@@ -26,12 +28,14 @@ namespace School_Management_System.Models
         [ForeignKey("Sections")]
         public int SectionId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Student Name is required")]
         [StringLength(40, MinimumLength = 3)]
+        [Display(Name = "Student Name")]
         public string StudentName { get; set; } = default!;
 
 
         [Required]
+        [Display(Name = "Roll No")]
         public int RollNo { get; set; }
 
 
@@ -42,26 +46,54 @@ namespace School_Management_System.Models
 
         [Required]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Date Of Birth")]
         public DateTime Dob { get; set; }
 
 
-        [Required]
+        
         [EnumDataType(typeof(BloodGroup))]
-        public BloodGroup BloodGroup { get; set; } 
+        public BloodGroup BloodGroup { get; set; }
+
+
+        [DataType(DataType.ImageUrl)]
+        public string? ImageUrl { get; set; }
+
+
+        [NotMapped, Display(Name = "Image")]
+        public IFormFile? ImageFile { get; set; }
 
 
         [Required]
         [StringLength(40, MinimumLength = 3)]
+        [Display(Name = "Guardian Name")]
         public string GuardianName { get; set; } = default!;
 
 
-        [Required]
+   
         public string Address { get; set; } = default!;
+
+
+        [Display(Name = "Phone Number")]
+        [Column("PhoneNumber")]
+        [Required(ErrorMessage = "Phone number is required")]
+        [Phone(ErrorMessage = "Please enter a valid phone number")]
+        public string Contact { get; set; } = default!;
 
 
         [Required]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime AdmissionDate { get; set; }
+
+        //all nevigation links
+        public Users? Users { get; set; }
+
+
+        [Required]  
+        public Classes Classes { get;set;} = default!;
+
+        [Required]
+        public Sections Sections { get; set; } = default!;
+
 
 
     }

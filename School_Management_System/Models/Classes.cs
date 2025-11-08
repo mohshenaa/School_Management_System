@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace School_Management_System.Models
 {
     public class Classes
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]   //classId jate auto generate na hoy
         public int ClassId { get; set; }
 
 
