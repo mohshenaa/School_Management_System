@@ -11,13 +11,29 @@ namespace School_Management_System.DB
         // DbSets
         public DbSet<Users> Users { get; set; } = default!;
         public DbSet<Roles> Roles { get; set; } = default!;
-        public DbSet<Teachers> Teachers { get; set; } = default!;
         public DbSet<Students> Students { get; set; } = default!;
         public DbSet<Departments> Departments { get; set; } = default!;
         public DbSet<Classes> Classes { get; set; } = default!;
+        public DbSet<Attendance> Attendance { get; set; } = default!;
         public DbSet<Exams> Exams { get; set; } = default!;
         public DbSet<Sections> Sections { get; set; } = default!;
         public DbSet<Subjects> Subjects { get; set; } = default!;
+        public DbSet<Fees_Collection> Fees_Collection { get; set; } = default!;
+        public DbSet<Fees_Types> Fees_Types { get; set; } = default!;
+
+
+
+        public DbSet<Teachers> Teachers { get; set; } = default!;
+        public DbSet<TeachersAttendance> TeachersAttendance { get; set; } = default!;
+        public DbSet<Salary> Salary { get; set; } = default!;
+
+
+
+        public DbSet<Books> Books { get; set; }= default!;
+
+
+        public DbSet<Expenses> Expenses { get; set; } = default!;
+
 
 
 

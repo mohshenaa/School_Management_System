@@ -17,6 +17,7 @@ namespace School_Management_System.Models
         [Required]
         [ForeignKey("Classes")]
         public int ClassId { get; set; }
+
         [Required]
         [ForeignKey("Departments")]
         public int DepartmentId { get; set; }

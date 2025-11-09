@@ -14,7 +14,7 @@ namespace School_Management_System.Models
         [Required]
         public string SessionYear { get; set; } = default!;
 
-
+        public IList<Sections> Sections { get; set; }   
 
     }
 }

@@ -18,7 +18,7 @@ namespace School_Management_System.Models
         [Required]
         public Classes Class { get; set; }=new();
       
-
+        public IList<Students> Students { get; set; }
     }
 }
 //section_id(PK)
