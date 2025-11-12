@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace School_Management_System.Models
 {
+    [Table(" Exam Results")]
     public class Exam_Results
     {
         [Key]

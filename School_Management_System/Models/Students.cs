@@ -3,8 +3,6 @@ using School_Management_System.SecurityModels;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection;
-using static System.Collections.Specialized.BitVector32;
 
 namespace School_Management_System.Models
 {
@@ -23,6 +21,10 @@ namespace School_Management_System.Models
         [ForeignKey("Classes")]
         public int ClassId { get; set; }
 
+        [Required]
+        [ForeignKey("Departments")]
+        public int DepartmentId { get; set; }
+        public Departments Departments { get; set; } = default!;
 
         [Required]
         [ForeignKey("Sections")]

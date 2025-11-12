@@ -44,7 +44,7 @@ namespace School_Management_System.Models
 
         //navigation link
 
-        public Classes Class { get; set; } = new();
+        public IList<Classes> Class { get; set; } = [];
     }
     public enum Term
     {
