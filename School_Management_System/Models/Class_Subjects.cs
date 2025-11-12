@@ -8,7 +8,6 @@ namespace School_Management_System.Models
         public int Id { get; set; }
 
        
-     
         public int ClassId { get; set; }
    
         public int SubjectId { get; set; }
