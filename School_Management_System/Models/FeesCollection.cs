@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace School_Management_System.Models
 {
     [Table("Fees Collection")]
-    public class Fees_Collection
+    public class FeesCollection
     {
         [Key]
         public int Id { get; set; }
@@ -14,7 +14,7 @@ namespace School_Management_System.Models
         public int StudentId { get; set; }
 
         [Required]
-        [ForeignKey("Fees_Types")]
+        [ForeignKey("FeesTypes")]
         public int FeesTypeId { get; set; }
 
         [Required]
@@ -34,7 +34,7 @@ namespace School_Management_System.Models
         public FeesStatus Status { get; set; }  
 
         public Students Students { get; set; }= default!;
-        public Fees_Types Fees_Types { get; set; } = default!;
+        public FeesTypes FeesTypes { get; set; } = default!;
     }
     public enum FeesStatus
     {

@@ -19,8 +19,8 @@ namespace School_Management_System.DB
         public DbSet<Exams> Exams { get; set; } = default!;
         public DbSet<Sections> Sections { get; set; } = default!;
         public DbSet<Subjects> Subjects { get; set; } = default!;
-        public DbSet<Fees_Collection> Fees_Collection { get; set; } = default!;
-        public DbSet<Fees_Types> Fees_Types { get; set; } = default!;
+        public DbSet<FeesCollection> FeesCollection { get; set; } = default!;
+        public DbSet<FeesTypes> FeesTypes { get; set; } = default!;
 
 
 

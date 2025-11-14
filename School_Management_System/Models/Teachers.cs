@@ -54,7 +54,9 @@ namespace School_Management_System.Models
 
         public Departments Departments { get; set; } = default!;
 
+        public List<Assignments> Assignments { get; set; } = new();
 
+        public List<Salary> Salary { get; set; } = new();
 
     }
 

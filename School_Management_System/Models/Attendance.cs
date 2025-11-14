@@ -18,7 +18,6 @@ namespace School_Management_System.Models
         public int StudentId { get; set; }
 
         [Required]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
         [Required]
@@ -30,7 +29,7 @@ namespace School_Management_System.Models
 
 
 
-        public Students Student { get; set; } = new();
+        public List<Students> Students { get; set; } = new();
 
     }
     public enum Status

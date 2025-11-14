@@ -13,9 +13,9 @@ namespace School_Management_System.Models
         public int SubjectId { get; set; }
         public int TeacherId { get; set; }
 
-        public Classes Class { get; set; } = new();
-        public Subjects Subject { get; set; } = new();
-        public Teachers Teacher { get; set; } = new();
+        public List<Classes> Classes { get; set; } = new();
+        public List<Subjects> Subject { get; set; } = new();
+        public List<Teachers> Teacher { get; set; } = new();
     }
 }
 //id(PK)

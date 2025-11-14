@@ -21,26 +21,32 @@ namespace School_Management_System.Models
         public int SectionId { get; set; }
         public Sections Sections { get; set; } = default!;
 
-        public string Day { get; set; } = default!;
+        public string Day { get; set; } = default!;//weeks day
 
 
-        public string Period { get; set; } = default!;
+        [Required]
+        public TimeOnly Start { get; set; }//class start time 
+
+        [Required]
+        public TimeOnly End { get; set; }//class end time 
+
+        public string Period { get; set; } = default!; //1st,2nd.... period
 
         [DisplayName("Room Num")]
         public string Room { get; set; } = default!;
 
-        //[Required]
-        //[ForeignKey("Teachers")]
-        //public int TeacherId { get; set; }
+        [Required]
+        [ForeignKey("Teachers")]
+        public int TeacherId { get; set; }
 
-        //public Teachers Teachers { get; set; } = default!;
+        public Teachers Teachers { get; set; } = default!;
 
 
-        //[Required]
-        //[ForeignKey("Students")]
-        //public int StudentId { get; set; }
+        [Required]
+        [ForeignKey("Subjects")]
+        public int SubjectId { get; set; }
 
-        //public Students Students { get; set; } = default!;
+        public Subjects Subjects { get; set; } = default!;
 
 
     }

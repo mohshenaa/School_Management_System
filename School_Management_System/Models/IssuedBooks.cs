@@ -6,7 +6,7 @@ namespace School_Management_System.Models
 {
 
     [Table("Books Issued")]
-    public class Issued_Books
+    public class IssuedBooks
     {
 
         [Key]

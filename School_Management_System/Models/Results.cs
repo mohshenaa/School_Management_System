@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace School_Management_System.Models
 {
-    [Table(" Exam Results")]
-    public class Exam_Results
+    [Table(" Results")]
+    public class Results
     {
         [Key]
         public int ResultId { get; set; }
@@ -19,10 +19,15 @@ namespace School_Management_System.Models
         public int SubjectId { get; set; }
 
         [Required]
+        [ForeignKey("Marks Obtained")]
         public float MarksObtained { get; set; }
 
         [Required]
         public string Grade { get; set; } = default!;
+
+
+        [ForeignKey("Published Date")]
+        public DateTime PublishedDate { get; set; }
 
         public string? Remarks { get; set; }   //what is remarks?
 
@@ -31,28 +36,28 @@ namespace School_Management_System.Models
         public Exams Exam { get; set; } = new();
 
         [Required]           
-        public Students Student { get; set; } = new();
+        public List<Students> Student { get; set; } = new();
 
         [Required]
         public Subjects Subject { get; set; } = new();
 
-        //public static string GetGrade(float marks)
-        //{
-        //    if (marks >= 90)
-        //        return "A+";
-        //    else if (marks >= 80)
-        //        return "A";
-        //    else if (marks >= 70)
-        //        return "B+";
-        //    else if (marks >= 60)
-        //        return "B";
-        //    else if (marks >= 50)
-        //        return "C";
-        //    else if (marks >= 40)
-        //        return "D";
-        //    else
-        //        return "F";
-        //}
+        public static string GetGrade(float marks)
+        {
+            if (marks >= 90)
+                return "A+";
+            else if (marks >= 80)
+                return "A";
+            else if (marks >= 70)
+                return "B+";
+            else if (marks >= 60)
+                return "B";
+            else if (marks >= 50)
+                return "C";
+            else if (marks >= 40)
+                return "D";
+            else
+                return "F";
+        }
     }
 }
 //result_id(PK)

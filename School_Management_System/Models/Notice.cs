@@ -22,8 +22,6 @@ namespace School_Management_System.Models
         public int RoleId { get; set; }
 
 
-
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Posted {  get; set; }
 
         //navigation link

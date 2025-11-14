@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace School_Management_System.Models
 {
     [Table("Hostel Residents")]
-    public class Hostel_Residents
+    public class HostelResidents
     {
         [Key]
         public int Id { get; set; }

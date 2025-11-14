@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace School_Management_System.Models
 {
     [Table(" Fees Types")]
-    public class Fees_Types
+    public class FeesTypes
     {
         [Key]
         public int FeesTypeId { get; set; }
