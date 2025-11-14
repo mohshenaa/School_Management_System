@@ -51,8 +51,11 @@ namespace School_Management_System.Models
         [Display(Name = "Date Of Birth")]
         public DateTime Dob { get; set; }
 
+        [DisplayName("Birth Res No")]
+        [StringLength(17)]
+        [Required]
+        public string BRN { get; set; }
 
-        
         [EnumDataType(typeof(BloodGroup))]
         public BloodGroup BloodGroup { get; set; }
 

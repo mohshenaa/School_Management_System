@@ -22,21 +22,35 @@ namespace School_Management_System.DB
         public DbSet<FeesCollection> FeesCollection { get; set; } = default!;
         public DbSet<FeesTypes> FeesTypes { get; set; } = default!;
 
+        public DbSet<ClassTime> ClassTime { get; set; } = default!;
 
+        public DbSet<Events> Events { get; set; } = default!; 
+        public DbSet<Hostel> Hostel { get; set; } = default!; 
+        public DbSet<HostelResidents> HostelResidents { get; set; } = default!;
+        public DbSet<Messages> Messages { get; set; } = default!;
+        public DbSet<Notice> Notice { get; set; } = default!; 
+        public DbSet<Result> Result { get; set; } = default!; 
+        public DbSet<TransportAssignments> TransportAssignments { get; set; } = default!; 
+        public DbSet<TransportRoutes> TransportRoutes { get; set; } = default!; 
+  
 
+        public DbSet<Assignments> Assignments { get; set; } = default!;
+
+        public DbSet<Submissions> Submissions { get; set; } = default!;
         public DbSet<Teachers> Teachers { get; set; } = default!;
         public DbSet<TeachersAttendance> TeachersAttendance { get; set; } = default!;
         public DbSet<Salary> Salary { get; set; } = default!;
 
 
 
-        public DbSet<Books> Books { get; set; }= default!;
+        public DbSet<Books> Books { get; set; } = default!;
 
-
+        public DbSet<IssuedBooks> IssuedBooks { get; set; } = default!;
         public DbSet<Expenses> Expenses { get; set; } = default!;
 
 
-
+        public DbSet<ActivityLogs> ActivityLogs { get; set; } = default!;
+        public DbSet<LoginLogs> LoginLogs { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,9 +1,8 @@
-﻿using School_Management_System.SecurityModels;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace School_Management_System.Models
+namespace School_Management_System.SecurityModels
 {
     [Table("Login Logs")]
     public class LoginLogs

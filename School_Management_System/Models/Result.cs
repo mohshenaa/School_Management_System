@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace School_Management_System.Models
 {
-    [Table(" Results")]
-    public class Results
+    [Table(" Result")]
+    public class Result
     {
         [Key]
         public int ResultId { get; set; }
