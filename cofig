@@ -1,0 +1,317 @@
+ // =============================
+ // ⚙️ Fluent API Configuration
+ // =============================
+ protected override void OnModelCreating(ModelBuilder modelBuilder)
+ {
+     //    // ==========================
+     //    // User
+     //    // ==========================
+     //    modelBuilder.Entity<User>()
+     //        .HasIndex(u => u.Email)
+     //        .IsUnique();
+
+     //    modelBuilder.Entity<User>()
+     //        .HasOne(u => u.Role)
+     //        .WithMany(r => r.Users)
+     //        .HasForeignKey(u => u.RoleId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    // ==========================
+     //    // Message (Self Reference)
+     //    // ==========================
+     //    modelBuilder.Entity<Message>()
+     //        .HasOne(m => m.Sender)
+     //        .WithMany(u => u.SentMessages)
+     //        .HasForeignKey(m => m.SenderId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    modelBuilder.Entity<Message>()
+     //        .HasOne(m => m.Receiver)
+     //        .WithMany(u => u.ReceivedMessages)
+     //        .HasForeignKey(m => m.ReceiverId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    // ==========================
+     //    // Student <-> Class
+     //    // ==========================
+     //    modelBuilder.Entity<Student>()
+     //        .HasOne(s => s.Class)
+     //        .WithMany(c => c.Students)
+     //        .HasForeignKey(s => s.ClassId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    // ==========================
+     //    // Section <-> Class
+     //    // ==========================
+     //    modelBuilder.Entity<Section>()
+     //        .HasOne(sec => sec.Class)
+     //        .WithMany(c => c.Sections)
+     //        .HasForeignKey(sec => sec.ClassId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    // ==========================
+     //    // Subject <-> Class
+     //    // ==========================
+     //    modelBuilder.Entity<Subject>()
+     //        .HasOne(sub => sub.Class)
+     //        .WithMany(c => c.Subjects)
+     //        .HasForeignKey(sub => sub.ClassId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    // ==========================
+     //    // ClassSubject (junction) - Composite PK
+     //    // ==========================
+     //    modelBuilder.Entity<ClassSubject>()
+     //        .HasKey(cs => new { cs.ClassId, cs.SubjectId, cs.TeacherId });
+
+     //    modelBuilder.Entity<ClassSubject>()
+     //        .HasOne(cs => cs.Class)
+     //        .WithMany(c => c.ClassSubjects)
+     //        .HasForeignKey(cs => cs.ClassId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    modelBuilder.Entity<ClassSubject>()
+     //        .HasOne(cs => cs.Subject)
+     //        .WithMany(s => s.ClassSubjects)
+     //        .HasForeignKey(cs => cs.SubjectId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    modelBuilder.Entity<ClassSubject>()
+     //        .HasOne(cs => cs.Teacher)
+     //        .WithMany(t => t.ClassSubjects)
+     //        .HasForeignKey(cs => cs.TeacherId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    // ==========================
+     //    // Exam <-> Class
+     //    // ==========================
+     //    modelBuilder.Entity<Exam>()
+     //        .HasOne(e => e.Class)
+     //        .WithMany(c => c.Exams)
+     //        .HasForeignKey(e => e.ClassId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    // ==========================
+     //    // ExamResult - Composite PK Optional
+     //    // ==========================
+     //    modelBuilder.Entity<ExamResult>()
+     //        .HasKey(er => new { er.ExamId, er.StudentId, er.SubjectId });
+
+     //    modelBuilder.Entity<ExamResult>()
+     //        .HasOne(er => er.Exam)
+     //        .WithMany(e => e.ExamResults)
+     //        .HasForeignKey(er => er.ExamId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    modelBuilder.Entity<ExamResult>()
+     //        .HasOne(er => er.Student)
+     //        .WithMany(s => s.ExamResults)
+     //        .HasForeignKey(er => er.StudentId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    modelBuilder.Entity<ExamResult>()
+     //        .HasOne(er => er.Subject)
+     //        .WithMany()
+     //        .HasForeignKey(er => er.SubjectId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    // ==========================
+     //    // Attendance
+     //    // ==========================
+     //    modelBuilder.Entity<Attendance>()
+     //        .HasOne(a => a.Student)
+     //        .WithMany(s => s.Attendances)
+     //        .HasForeignKey(a => a.StudentId)
+     //        .OnDelete(DeleteBehavior.Cascade);
+
+     //    modelBuilder.Entity<Attendance>()
+     //        .HasOne(a => a.Teacher)
+     //        .WithMany(t => t.MarkedAttendances)
+     //        .HasForeignKey(a => a.TeacherId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    // ==========================
+     //    // TeacherAttendance
+     //    // ==========================
+     //    modelBuilder.Entity<TeacherAttendance>()
+     //        .HasOne(ta => ta.Teacher)
+     //        .WithMany(t => t.TeacherAttendances)
+     //        .HasForeignKey(ta => ta.TeacherId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    // ==========================
+     //    // FeesType <-> Class
+     //    // ==========================
+     //    modelBuilder.Entity<FeeType>()
+     //        .HasOne(f => f.Class)
+     //        .WithMany(c => c.FeeTypes)
+     //        .HasForeignKey(f => f.ClassId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    // FeesCollection → allow multiple per day
+     //    modelBuilder.Entity<FeeCollection>()
+     //        .HasOne(fc => fc.Student)
+     //        .WithMany(s => s.FeeCollections)
+     //        .HasForeignKey(fc => fc.StudentId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    modelBuilder.Entity<FeeCollection>()
+     //        .HasOne(fc => fc.FeeType)
+     //        .WithMany()
+     //        .HasForeignKey(fc => fc.FeeTypeId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    // ==========================
+     //    // Salary -> Teacher
+     //    // ==========================
+     //    modelBuilder.Entity<Salary>()
+     //        .HasOne(s => s.Teacher)
+     //        .WithMany(t => t.Salaries)
+     //        .HasForeignKey(s => s.TeacherId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    // ==========================
+     //    // HostelResident -> Student, Hostel
+     //    // ==========================
+     //    modelBuilder.Entity<HostelResident>()
+     //        .HasOne(hr => hr.Student)
+     //        .WithMany(s => s.HostelResidents)
+     //        .HasForeignKey(hr => hr.StudentId)
+     //        .OnDelete(DeleteBehavior.Cascade);
+
+     //    modelBuilder.Entity<HostelResident>()
+     //        .HasOne(hr => hr.Hostel)
+     //        .WithMany(h => h.Residents)
+     //        .HasForeignKey(hr => hr.HostelId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    // ==========================
+     //    // TransportAssignment
+     //    // ==========================
+     //    modelBuilder.Entity<TransportAssignment>()
+     //        .HasOne(ta => ta.Student)
+     //        .WithMany(s => s.TransportAssignments)
+     //        .HasForeignKey(ta => ta.StudentId)
+     //        .OnDelete(DeleteBehavior.Cascade);
+
+     //    modelBuilder.Entity<TransportAssignment>()
+     //        .HasOne(ta => ta.TransportRoute)
+     //        .WithMany(r => r.Assignments)
+     //        .HasForeignKey(ta => ta.RouteId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    // ==========================
+     //    // Timetable
+     //    // ==========================
+     //    modelBuilder.Entity<Timetable>()
+     //        .HasOne(tt => tt.Class)
+     //        .WithMany(c => c.Timetables)
+     //        .HasForeignKey(tt => tt.ClassId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    modelBuilder.Entity<Timetable>()
+     //        .HasOne(tt => tt.Section)
+     //        .WithMany(s => s.Timetables)
+     //        .HasForeignKey(tt => tt.SectionId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    modelBuilder.Entity<Timetable>()
+     //        .HasOne(tt => tt.Subject)
+     //        .WithMany()
+     //        .HasForeignKey(tt => tt.SubjectId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    modelBuilder.Entity<Timetable>()
+     //        .HasOne(tt => tt.Teacher)
+     //        .WithMany(t => t.Timetables)
+     //        .HasForeignKey(tt => tt.TeacherId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    // ==========================
+     //    // IssuedBook
+     //    // ==========================
+     //    modelBuilder.Entity<IssuedBook>()
+     //        .HasIndex(ib => new { ib.BookId, ib.IssuedTo })
+     //        .IsUnique();
+
+     //    modelBuilder.Entity<IssuedBook>()
+     //        .HasOne(ib => ib.Book)
+     //        .WithMany(b => b.IssuedBooks)
+     //        .HasForeignKey(ib => ib.BookId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    modelBuilder.Entity<IssuedBook>()
+     //        .HasOne(ib => ib.User)
+     //        .WithMany()
+     //        .HasForeignKey(ib => ib.IssuedTo)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    // ==========================
+     //    // Assignment
+     //    // ==========================
+     //    modelBuilder.Entity<Assignment>()
+     //        .HasOne(a => a.Class)
+     //        .WithMany(c => c.Assignments)
+     //        .HasForeignKey(a => a.ClassId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    modelBuilder.Entity<Assignment>()
+     //        .HasOne(a => a.Subject)
+     //        .WithMany()
+     //        .HasForeignKey(a => a.SubjectId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    modelBuilder.Entity<Assignment>()
+     //        .HasOne(a => a.Teacher)
+     //        .WithMany(t => t.Assignments)
+     //        .HasForeignKey(a => a.TeacherId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    // ==========================
+     //    // Submission → Composite PK
+     //    // ==========================
+     //    modelBuilder.Entity<Submission>()
+     //        .HasKey(s => new { s.AssignmentId, s.StudentId });
+
+     //    modelBuilder.Entity<Submission>()
+     //        .HasOne(s => s.Assignment)
+     //        .WithMany(a => a.Submissions)
+     //        .HasForeignKey(s => s.AssignmentId)
+     //        .OnDelete(DeleteBehavior.Cascade);
+
+     //    modelBuilder.Entity<Submission>()
+     //        .HasOne(s => s.Student)
+     //        .WithMany(st => st.Submissions)
+     //        .HasForeignKey(s => s.StudentId)
+     //        .OnDelete(DeleteBehavior.Cascade);
+
+     //    // ==========================
+     //    // Class → Department + Unique
+     //    // ==========================
+     //    modelBuilder.Entity<Class>()
+     //        .HasOne(c => c.Department)
+     //        .WithMany(d => d.Classes)
+     //        .HasForeignKey(c => c.DepartmentId)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+     //    modelBuilder.Entity<Class>()
+     //        .HasIndex(c => new { c.ClassName, c.SessionYear, c.DepartmentId })
+     //        .IsUnique();
+
+     //    // ==========================
+     //    // Book → ISBN Unique
+     //    // ==========================
+     //    modelBuilder.Entity<Book>()
+     //        .HasIndex(b => b.ISBN)
+     //        .IsUnique();
+
+     //    // ==========================
+     //    // Notice → VisibleTo (Role)
+     //    // ==========================
+     //    modelBuilder.Entity<Notice>()
+     //        .HasOne(n => n.Role)
+     //        .WithMany()
+     //        .HasForeignKey(n => n.VisibleTo)
+     //        .OnDelete(DeleteBehavior.Restrict);
+
+ }
