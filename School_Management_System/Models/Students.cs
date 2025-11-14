@@ -1,112 +1,138 @@
-﻿using School_Management_System.Models;
-using School_Management_System.SecurityModels;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace School_Management_System.Models
+public class Student
 {
-    public class Students
-    {
-        [Key]
-        public int StudentId { get; set; }
+    [Key]
+    public int StudentId { get; set; }
 
 
-        [Required]
-        [ForeignKey("Users")]
-        public int UserId { get; set; }
+    [ForeignKey(nameof(User))]
+    public int UserId { get; set; }
+    public User User { get; set; } = default!;
+
+    [Required, MaxLength(150)]
+    public string StudentName { get; set; } = default!;   // English default name
+
+    [MaxLength(150)]
+    public string? ArabicStudentName { get; set; }        // optional
+
+    [MaxLength(150)]
+    public string? BanglaStudentName { get; set; }        // optional
 
 
-        [Required]
-        [ForeignKey("Classes")]
-        public int ClassId { get; set; }
+    [ForeignKey(nameof(Class))]
+    public int ClassId { get; set; }
+    public Class Class { get; set; } = default!;
 
-        [Required]
-        [ForeignKey("Departments")]
-        public int DepartmentId { get; set; }
-        public Departments Departments { get; set; } = default!;
-
-        [Required]
-        [ForeignKey("Sections")]
-        public int SectionId { get; set; }
-
-        [Required(ErrorMessage = "Student Name is required")]
-        [StringLength(40, MinimumLength = 3)]
-        [Display(Name = "Student Name")]
-        public string StudentName { get; set; } = default!;
-
-
-        [Required]
-        [Display(Name = "Roll No")]
-        public int RollNo { get; set; }
-
-
-        [Required]
-        [EnumDataType(typeof(Gender))]
-        public Gender Gender { get; set; }
-
-
-        [Required]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Date Of Birth")]
-        public DateTime Dob { get; set; }
-
-        [DisplayName("Birth Res No")]
-        [StringLength(17)]
-        [Required]
-        public string BRN { get; set; }
-
-        [EnumDataType(typeof(BloodGroup))]
-        public BloodGroup BloodGroup { get; set; }
-
-
-        [DataType(DataType.ImageUrl)]
-        public string? ImageUrl { get; set; }
-
-
-        [NotMapped, Display(Name = "Image")]
-        public IFormFile? ImageFile { get; set; }
-
-
-        [Required]
-        [StringLength(40, MinimumLength = 3)]
-        [Display(Name = "Guardian Name")]
-        public string GuardianName { get; set; } = default!;
-
-
-   
-        public string Address { get; set; } = default!;
-
-
-        [Display(Name = "Phone Number")]
-        [Column("PhoneNumber")]
-        [Required(ErrorMessage = "Phone number is required")]
-        [Phone(ErrorMessage = "Please enter a valid phone number")]
-        public string Contact { get; set; } = default!;
-
-
-        [Required]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime AdmissionDate { get; set; }
-
-        //all nevigation links
-        public Users? Users { get; set; }
-
-
-        [Required]  
-        public Classes Classes { get;set;} = default!;
-
-        [Required]
-        public Sections Sections { get; set; } = default!;
+    [ForeignKey(nameof(Section))]
+    public int SectionId { get; set; }
+    public Section Section { get; set; } = default!;
 
 
 
-    }
-    public enum Gender
-    {
-        Male,
-        Female
-    }
+    [Required, MaxLength(20)]
+    [RegularExpression(@"^[A-Za-z0-9\-]+$", ErrorMessage = "Invalid Roll No format.")]
+    public string RollNo { get; set; } = default!;
+
+    [MaxLength(50)]
+    public string? AdmissionNumber { get; set; }  // School generated
+
+    [MaxLength(50)]
+    public string? NationalId { get; set; }       // NID / Birth Certificate No
+
+    public DateTimeOffset AdmissionDate { get; set; }
+
+
+
+    public Gender? Gender { get; set; }
+    public DateTimeOffset DOB { get; set; }
+
+    [MaxLength(5)]
+    public string? BloodGroup { get; set; }
+
+    
+    [MaxLength(150)]
+    public string? FatherName { get; set; }      // Parents / Guardian Info
+
+    [MaxLength(20)]
+    public string? FatherPhone { get; set; }
+
+    [MaxLength(150)]
+    public string? MotherName { get; set; }
+
+    [MaxLength(20)]
+    public string? MotherPhone { get; set; }
+
+    [MaxLength(150)]
+    public string? GuardianName { get; set; }
+
+    [MaxLength(20)]
+    public string? GuardianPhone { get; set; }
+
+    [MaxLength(150)]
+    public string? GuardianEmail { get; set; }
+
+
+    [MaxLength(500)]
+    public string? Address { get; set; }
+
+    [MaxLength(150)]
+    public string? City { get; set; }
+
+    [MaxLength(150)]
+    public string? Country { get; set; }
+
+
+    // Emergency Information
+
+    [MaxLength(150)]
+    public string? EmergencyContactName { get; set; }
+
+    [MaxLength(20)]
+    public string? EmergencyPhone { get; set; }
+
+    [MaxLength(500)]
+    public string? MedicalNotes { get; set; } // Allergies / Restrictions
+
+
+    [MaxLength(250)]
+    public string? PreviousSchoolName { get; set; }  // Academic History (optional)
+
+    public double? PreviousGPA { get; set; }
+
+
+    [MaxLength(300)]
+    public string? ProfileImageUrl { get; set; }
+
+    [MaxLength(300)]
+    public string? DocumentUrl { get; set; } // Birth Cert, Transfer Cert, etc.
+
+
+    public bool IsActive { get; set; } = true;
+
+    public DateTimeOffset? LeavingDate { get; set; }
+
+    [MaxLength(300)]
+    public string? LeavingReason { get; set; }
+
+  
+    public Dictionary<string, string>? TranslatedNames { get; set; }  // Advanced Multilanguage (optional)
+
+
+    public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
+    public DateTimeOffset? UpdatedAt { get; set; }
+}
+
+
+// -------------------------
+// ENUM
+// -------------------------
+public enum Gender
+{
+    Male,
+    Female,
+    Other,
+    PreferNotToSay
+}
+
     public enum BloodGroup
     {
         A_Positive,
