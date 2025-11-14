@@ -1,0 +1,602 @@
+//using Microsoft.EntityFrameworkCore;
+//using System;
+//using System.Collections.Generic;
+//using System.ComponentModel.DataAnnotations;
+//using System.ComponentModel.DataAnnotations.Schema;
+
+//namespace SchoolManagementSystem.Models
+//{
+//    // 1. Roles
+//    [Index(nameof(RoleName), IsUnique = true)]
+//    public class Role
+//    {
+//        [Key]
+//        public int RoleId { get; set; }
+
+//        [Required, MaxLength(50)]
+//        public string RoleName { get; set; }
+
+//        public ICollection<User> Users { get; set; }=new HashSet<User>();
+//    }
+
+//    // 2. Users
+//    [Index(nameof(Email), IsUnique = true)]
+//    public class User
+//    {
+//        [Key]
+//        public int UserId { get; set; }
+
+//        [Required, MaxLength(100)]
+//        public string Name { get; set; }
+
+//        [Required, MaxLength(100)]
+//        public string Email { get; set; }
+
+//        [Required]
+//        public string Password { get; set; }
+
+//        [ForeignKey("Role")]
+//        public int RoleId { get; set; }
+
+//        public bool Status { get; set; } = true;
+
+//        public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+//        public Role Role { get; set; }
+
+//        public ICollection<LoginLog> LoginLogs { get; set; } = new HashSet<LoginLog>();
+//        public ICollection<ActivityLog> ActivityLogs { get; set; } = new HashSet<ActivityLog>();
+//        [InverseProperty("Sender")]
+//        public ICollection<Message> SentMessages { get; set; }= new HashSet<Message>();
+
+//        [InverseProperty("Receiver")]
+//        public ICollection<Message> ReceivedMessages { get; set; } = new HashSet<Message>();
+//    }
+
+//    // 3. Students
+//    public class Student
+//    {
+//        [Key]
+//        public int StudentId { get; set; }
+
+//        [ForeignKey("User")]
+//        public int UserId { get; set; }
+
+//        [ForeignKey("Class")]
+//        public int ClassId { get; set; }
+
+//        [ForeignKey("Section")]
+//        public int SectionId { get; set; }
+
+//        public string RollNo { get; set; }
+//        public string Gender { get; set; }
+//        public DateTime DOB { get; set; }
+//        public string? BloodGroup { get; set; }
+//        public string? GuardianName { get; set; }
+//        public string? Address { get; set; }
+//        public DateTime AdmissionDate { get; set; }
+
+//        public User User { get; set; }
+//        public Class Class { get; set; }
+//        public Section Section { get; set; }
+
+//        public ICollection<Attendance> Attendances { get; set; } = new HashSet<Attendance>();
+//        public ICollection<ExamResult> ExamResults { get; set; } = new HashSet<ExamResult>();
+//        public ICollection<FeeCollection> FeeCollections { get; set; } = new HashSet<FeeCollection>();
+//        public ICollection<HostelResident> HostelResidents { get; set; } = new HashSet<HostelResident>();
+//        public ICollection<TransportAssignment> TransportAssignments { get; set; } = new HashSet<TransportAssignment>();
+//        public ICollection<Submission> Submissions { get; set; } = new HashSet<Submission>();
+//    }
+
+//    // 4. Teachers
+//    public class Teacher
+//    {
+//        [Key]
+//        public int TeacherId { get; set; }
+
+//        [ForeignKey("User")]
+//        public int UserId { get; set; }
+//        [ForeignKey("Department")]
+//        public int DepartmentId { get; set; }
+//        public DateTime JoiningDate { get; set; }
+//        public string Qualification { get; set; }
+//        public string Designation { get; set; }
+
+//        public User User { get; set; }
+//        public Department Department { get; set; }
+//        public ICollection<ClassSubject> ClassSubjects { get; set; } = new HashSet<ClassSubject>();
+//        public ICollection<Attendance> MarkedAttendances { get; set; } = new HashSet<Attendance>();
+//        public ICollection<TeacherAttendance> TeacherAttendances { get; set; } = new HashSet<TeacherAttendance>();
+//        public ICollection<Timetable> Timetables { get; set; } = new HashSet<Timetable>();
+//        public ICollection<Assignment> Assignments { get; set; } = new HashSet<Assignment>();
+//        public ICollection<Salary> Salaries { get; set; } = new HashSet<Salary>();
+
+
+//    }
+
+//    // 5. Classes
+//    public class Class
+//    {
+//        [Key]
+//        public int ClassId { get; set; }
+
+//        public string ClassName { get; set; }
+//        public string SessionYear { get; set; }
+//        [ForeignKey("Department")]
+//        public int DepartmentId { get; set; }
+//        public Department Department { get; set; }
+//        public ICollection<Section> Sections { get; set; } = new HashSet<Section>();
+//        public ICollection<Student> Students { get; set; } = new HashSet<Student>();
+//        public ICollection<Subject> Subjects { get; set; } = new HashSet<Subject>();
+//        public ICollection<ClassSubject> ClassSubjects { get; set; } = new HashSet<ClassSubject>();
+//        public ICollection<Exam> Exams { get; set; } = new HashSet<Exam>();
+//        public ICollection<Timetable> Timetables { get; set; } = new HashSet<Timetable>();
+//        public ICollection<Assignment> Assignments { get; set; } = new HashSet<Assignment>();
+//        public ICollection<FeeType> FeeTypes { get; set; } = new HashSet<FeeType>();
+
+//    }
+
+//    // 6. Sections
+//    public class Section
+//    {
+//        [Key]
+//        public int SectionId { get; set; }
+
+//        [ForeignKey("Class")]
+//        public int ClassId { get; set; }
+
+//        public string SectionName { get; set; }
+
+//        public Class Class { get; set; }
+//        public ICollection<Student> Students { get; set; } = new HashSet<Student>();
+//        public ICollection<Timetable> Timetables { get; set; } = new HashSet<Timetable>();
+//    }
+
+//    // 7. Subjects
+//    [Index(nameof(SubjectCode), IsUnique = true)]
+//    public class Subject
+//    {
+//        [Key]
+//        public int SubjectId { get; set; }
+
+//        [ForeignKey("Class")]
+//        public int ClassId { get; set; }
+//        [ForeignKey("Department")]
+//        public int DepartmentId { get; set; }
+//        public string SubjectName { get; set; }
+//        public string SubjectCode { get; set; }
+//        public bool IsOptional { get; set; }
+//        public Class Class { get; set; }
+//        public Department Department { get; set; }
+//        public ICollection<ClassSubject> ClassSubjects { get; set; } = new HashSet<ClassSubject>();
+//    }
+
+//    // 8. Class_Subjects (junction)
+//    public class ClassSubject
+//    {
+//        [ForeignKey("Class")]
+//        public int ClassId { get; set; }
+
+//        [ForeignKey("Subject")]
+//        public int SubjectId { get; set; }
+
+//        [ForeignKey("Teacher")]
+//        public int TeacherId { get; set; }
+//        public Class Class { get; set; }
+//        public Subject Subject { get; set; }
+//        public Teacher Teacher { get; set; }
+//    }
+
+//    // 9. Exams
+//    public class Exam
+//    {
+//        [Key]
+//        public int ExamId { get; set; }
+
+//        public string Name { get; set; }
+
+//        [ForeignKey("Class")]
+//        public int ClassId { get; set; }
+
+//        public string Term { get; set; }
+//        public DateTime StartDate { get; set; }
+//        public DateTime EndDate { get; set; }
+//        public string Type { get; set; }
+
+//        public Class Class { get; set; }
+//        public ICollection<ExamResult> ExamResults { get; set; } = new HashSet<ExamResult>();
+//    }
+
+//    // 10. Exam_Results
+//    public class ExamResult
+//    {
+//        [Key]
+//        public int ResultId { get; set; }
+
+//        [ForeignKey("Exam")]
+//        public int ExamId { get; set; }
+
+//        [ForeignKey("Student")]
+//        public int StudentId { get; set; }
+
+//        [ForeignKey("Subject")]
+//        public int SubjectId { get; set; }
+
+//        public double MarksObtained { get; set; }
+//        public string Grade { get; set; }
+//        public string Remarks { get; set; }
+
+//        public Exam Exam { get; set; }
+//        public Student Student { get; set; }
+//        public Subject Subject { get; set; }
+//    }
+
+//    // 11. Attendance
+//    public class Attendance
+//    {
+//        [Key]
+//        public int AttendanceId { get; set; }
+
+//        [ForeignKey("Student")]
+//        public int StudentId { get; set; }
+
+//        public DateTime Date { get; set; }
+//        public string Status { get; set; }
+
+//        [ForeignKey("Teacher")]
+//        public int TeacherId { get; set; }
+
+//        public Student Student { get; set; }
+//        public Teacher Teacher { get; set; }
+//    }
+
+//    // 12. Teacher_Attendance
+//    public class TeacherAttendance
+//    {
+//        [Key]
+//        public int Id { get; set; }
+
+//        [ForeignKey("Teacher")]
+//        public int TeacherId { get; set; }
+
+//        public DateTime Date { get; set; }
+//        public string Status { get; set; }
+
+//        public Teacher Teacher { get; set; }
+//    }
+
+//    // 13. Fees_Types
+//    public class FeeType
+//    {
+//        [Key]
+//        public int FeeTypeId { get; set; }
+
+//        [ForeignKey("Class")]
+//        public int ClassId { get; set; }
+
+//        public string Name { get; set; }
+//        public decimal Amount { get; set; }
+//        public string Frequency { get; set; }
+
+//        public Class Class { get; set; }
+//    }
+
+//    // 14. Fees_Collection
+//    public class FeeCollection
+//    {
+//        [Key]
+//        public int Id { get; set; }
+
+//        [ForeignKey("Student")]
+//        public int StudentId { get; set; }
+
+//        [ForeignKey("FeeType")]
+//        public int FeeTypeId { get; set; }
+
+//        public decimal AmountPaid { get; set; }
+//        public DateTime DatePaid { get; set; }
+//        public string PaymentMethod { get; set; }
+//        public string Status { get; set; }
+
+//        public Student Student { get; set; }
+//        public FeeType FeeType { get; set; }
+//    }
+
+//    // 15. Salaries
+//    public class Salary
+//    {
+//        [Key]
+//        public int SalaryId { get; set; }
+
+//        [ForeignKey("Teacher")]
+//        public int TeacherId { get; set; }
+
+//        public string Month { get; set; }
+//        public decimal Amount { get; set; }
+//        public string PaymentStatus { get; set; }
+
+//        public Teacher Teacher { get; set; }
+//    }
+
+//    // 16. Expenses
+//    public class Expense
+//    {
+//        [Key]
+//        public int ExpenseId { get; set; }
+
+//        public string Type { get; set; }
+//        public string? Description { get; set; }
+//        public decimal Amount { get; set; }
+//        public DateTime Date { get; set; }
+//    }
+
+//    // 17. Books
+//    public class Book
+//    {
+//        [Key]
+//        public int BookId { get; set; }
+
+//        public string Title { get; set; }
+//        public string Author { get; set; }
+//        public string? ISBN { get; set; }
+//        public string Category { get; set; }
+//        public int TotalCopies { get; set; }
+//        public int AvailableCopies { get; set; }
+
+//        public ICollection<IssuedBook> IssuedBooks { get; set; } = new HashSet<IssuedBook>();
+//    }
+
+//    // 18. Issued_Books
+//    public class IssuedBook
+//    {
+//        [Key]
+//        public int Id { get; set; }
+
+//        [ForeignKey("Book")]
+//        public int BookId { get; set; }
+
+//        [ForeignKey("User")]
+//        public int IssuedTo { get; set; }
+
+//        public DateTime IssueDate { get; set; }
+//        public DateTime? ReturnDate { get; set; }
+//        public decimal Fine { get; set; }
+
+//        public Book Book { get; set; }
+//        public User User { get; set; }
+//    }
+
+//    // 19. Notices
+//    public class Notice
+//    {
+//        [Key]
+//        public int NoticeId { get; set; }
+
+//        public string Title { get; set; }
+//        public string Content { get; set; }
+
+//        [ForeignKey("Role")]
+//        public int VisibleTo { get; set; }
+
+//        public DateTime DatePosted { get; set; }
+
+//        public Role Role { get; set; }
+//    }
+
+//    // 20. Hostels
+//    public class Hostel
+//    {
+//        [Key]
+//        public int HostelId { get; set; }
+
+//        public string Name { get; set; }
+//        public int Capacity { get; set; }
+//        public string WardenInfo { get; set; }
+
+//        public ICollection<HostelResident> Residents { get; set; } = new HashSet<HostelResident>();
+//    }
+
+//    // 21. Hostel_Residents
+//    public class HostelResident
+//    {
+//        [Key]
+//        public int Id { get; set; }
+
+//        [ForeignKey("Student")]
+//        public int StudentId { get; set; }
+
+//        [ForeignKey("Hostel")]
+//        public int HostelId { get; set; }
+
+//        public string RoomNo { get; set; }
+//        public DateTime CheckInDate { get; set; }
+
+//        public Student Student { get; set; }
+//        public Hostel Hostel { get; set; }
+//    }
+
+//    // 22. Transport_Routes
+//    public class TransportRoute
+//    {
+//        [Key]
+//        public int RouteId { get; set; }
+
+//        public string RouteName { get; set; }
+//        public string VehicleNo { get; set; }
+//        public string DriverName { get; set; }
+//        public string Stops { get; set; }
+
+//        public ICollection<TransportAssignment> Assignments { get; set; } = new HashSet<TransportAssignment>();
+//    }
+
+//    // 23. Transport_Assignments
+//    public class TransportAssignment
+//    {
+//        [Key]
+//        public int Id { get; set; }
+
+//        [ForeignKey("Student")]
+//        public int StudentId { get; set; }
+
+//        [ForeignKey("Route")]
+//        public int RouteId { get; set; }
+
+//        public string PickupPoint { get; set; }
+
+//        public Student Student { get; set; }
+//        public TransportRoute TransportRoute { get; set; }  
+//    }
+
+//    // 24. Timetable
+//    public class Timetable
+//    {
+//        [Key]
+//        public int Id { get; set; }
+
+//        [ForeignKey("Class")]
+//        public int ClassId { get; set; }
+
+//        [ForeignKey("Section")]
+//        public int SectionId { get; set; }
+
+//        [ForeignKey("Subject")]
+//        public int SubjectId { get; set; }
+
+//        [ForeignKey("Teacher")]
+//        public int TeacherId { get; set; }
+
+//        public string Day { get; set; }
+//        public string Period { get; set; }
+//        public string Room { get; set; }
+
+//        public Class Class { get; set; }
+//        public Section Section { get; set; }
+//        public Subject Subject { get; set; }
+//        public Teacher Teacher { get; set; }
+//    }
+
+//    // 25. Messages
+//    public class Message
+//    {
+//        [Key]
+//        public int MessageId { get; set; }
+
+//        [ForeignKey("Sender")]
+//        public int SenderId { get; set; }
+
+//        [ForeignKey("Receiver")]
+//        public int ReceiverId { get; set; }
+
+//        public string Content { get; set; }
+//        public DateTime Timestamp { get; set; }
+//        public string Status { get; set; }
+
+//        [InverseProperty("SentMessages")]
+//        public User Sender { get; set; }
+
+//        [InverseProperty("ReceivedMessages")]
+//        public User Receiver { get; set; }
+//    }
+
+//    // 26. Login_Logs
+//    public class LoginLog
+//    {
+//        [Key]
+//        public int Id { get; set; }
+
+//        [ForeignKey("User")]
+//        public int UserId { get; set; }
+
+//        public DateTime LoginTime { get; set; }
+//        public string IpAddress { get; set; }
+
+//        public User User { get; set; }
+//    }
+
+//    // 27. Activity_Logs
+//    public class ActivityLog
+//    {
+//        [Key]
+//        public int Id { get; set; }
+
+//        [ForeignKey("User")]
+//        public int UserId { get; set; }
+
+//        public string ActionType { get; set; }
+//        public string Description { get; set; }
+//        public DateTime Timestamp { get; set; }
+
+//        public User User { get; set; }
+//    }
+
+//    // 28. Events
+//    public class Event
+//    {
+//        [Key]
+//        public int EventId { get; set; }
+
+//        public string Title { get; set; }
+//        public string Description { get; set; }
+//        public DateTime EventDate { get; set; }
+//        public string TargetAudience { get; set; }
+//    }
+
+//    // 29. Assignments
+//    public class Assignment
+//    {
+//        [Key]
+//        public int AssignmentId { get; set; }
+
+//        [ForeignKey("Class")]
+//        public int ClassId { get; set; }
+
+//        [ForeignKey("Subject")]
+//        public int SubjectId { get; set; }
+
+//        [ForeignKey("Teacher")]
+//        public int TeacherId { get; set; }
+
+//        public string Title { get; set; }
+//        public string Description { get; set; }
+//        public DateTime DueDate { get; set; }
+
+//        public Class Class { get; set; }
+//        public Subject Subject { get; set; }
+//        public Teacher Teacher { get; set; }
+//        public ICollection<Submission> Submissions { get; set; } = new HashSet<Submission>();
+//    }
+
+//    // 30. Submissions
+//    public class Submission
+//    {
+//        [Key]
+//        public int SubmissionId { get; set; }
+
+//        [ForeignKey("Assignment")]
+//        public int AssignmentId { get; set; }
+
+//        [ForeignKey("Student")]
+//        public int StudentId { get; set; }
+
+//        public string FileLink { get; set; }
+//        public DateTime SubmittedAt { get; set; }
+//        public double Marks { get; set; }
+//        public string Feedback { get; set; }
+
+//        public Assignment Assignment { get; set; }
+//        public Student Student { get; set; }
+//    }
+//    // 31. Department
+//    public class Department
+//    {
+//        [Key]
+//        public int DepartmentId { get; set; }
+
+//        [Required, MaxLength(100)]
+//        public string DepartmentName { get; set; } = string.Empty;
+
+//        [MaxLength(200)]
+//        public string? Description { get; set; }
+//        public ICollection<Class> Classes { get; set; } = new HashSet<Class>();
+//    }
+//}
